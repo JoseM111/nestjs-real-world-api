@@ -1,9 +1,8 @@
 /** user.controller.ts */
 import { CreateUserDTO } from "@/user/dtos/create-user.dto"
-import { UserEntity } from "@/user/entities/user.entity"
 import { UserResponseType } from "@/user/types/user.response.type"
 import { UserService } from "@/user/user.service"
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common'
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 
 @Controller()
@@ -15,6 +14,7 @@ export class UserController {
 	
 	/// ======== <> member-request-methods <> ========
 	@Post('/users')
+	@UsePipes(new ValidationPipe())
 	async createUser(
 	@Body('user') createUserDTO: CreateUserDTO): Promise<UserResponseType> {
 		//..........
