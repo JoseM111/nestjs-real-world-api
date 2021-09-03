@@ -7,17 +7,25 @@ import { NestFactory } from '@nestjs/core'
 
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
 	//..........
 	const port = 3000
-	const portStr = `
-	\n\n\t\t\tserving at: http://localhost:${ port }\n\n
-	`
+	
 	const app = await NestFactory.create(AppModule)
 	await app.listen(port)
-	
-	console.log(portStr)
 }
 
-bootstrap().then()
+bootstrap()
+.then(() => {
+	const portStr = `
+	serving at: http://localhost:${ 3000 }
+	`
+	const bootstrapStr = `
+	☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+	 --[ NESTJS ]--project booted up correctly--( WELCOME )--
+	 \t${portStr.trim()}
+	☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+	`
+	console.log(bootstrapStr)
+})
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
