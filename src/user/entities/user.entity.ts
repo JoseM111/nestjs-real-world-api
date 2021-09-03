@@ -11,16 +11,18 @@ export class UserEntity {
 	@Column() email: string
 	@Column() username: string
 	
-	@Column({ default: '' })
+	@Column({ default: 'NONE' })
 	bio: string
-	@Column({ default: '' })
+	@Column({ default: 'NONE' })
 	image: string
 	
-	@Column() password: string
+	// Will hide password from request
+	@Column({ select: false })
+	password: string
 	
 	// will run hashing after creation of password
 	@BeforeInsert()
-	async hashPassword() {
+	async hashPassword(): Promise<void> {
 		//..........
 		// the value of <'10'> is the <`salt`> which just
 		// means how many times it will be encrypted

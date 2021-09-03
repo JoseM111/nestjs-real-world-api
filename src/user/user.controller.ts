@@ -1,5 +1,7 @@
 /** user.controller.ts */
 import { CreateUserDTO } from "@/user/dtos/create-user.dto"
+import { LoginUserDTO } from "@/user/dtos/login-user.dto"
+import { UserEntity } from "@/user/entities/user.entity"
 import { UserResponseType } from "@/user/types/user.response.type"
 import { UserService } from "@/user/user.service"
 import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common'
@@ -13,14 +15,40 @@ export class UserController {
 	) {}
 	
 	/// ======== <> member-request-methods <> ========
-	@Post('/users')
-	@UsePipes(new ValidationPipe())
+	@Post('/users') @UsePipes(new ValidationPipe())
 	async createUser(
-	@Body('user') createUserDTO: CreateUserDTO): Promise<UserResponseType> {
+	@Body('user') createUserDTO: CreateUserDTO
+	): Promise<UserResponseType> {
 		//..........
 		// console.log('createUser:', createUserDTO)
 		const user = await this.userService.serviceCreateUser(createUserDTO)
 		return this.userService.serviceBuildUserResponse(user)
 	}
+	
+	@Post('/users/login') @UsePipes(new ValidationPipe())
+	async userLogin(
+	@Body('user') loginUserDTO: LoginUserDTO
+	): Promise<UserResponseType> {
+		//..........
+		// testing function
+		// const test = 'Is user logged in, is a: [ SUCCESS | 201-code ]'
+		// return test as any
+		
+		const user = await this.userService.serviceLogin(loginUserDTO)
+		.then((user: UserEntity) => {
+			console.log('[ SUCCESS ].. you are logged in as:', `[ ${user.username} ]`)
+			return user
+		})
+		
+		// this line will add web tokens to our response
+		return this.userService.serviceBuildUserResponse(user)
+	}
 }
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+
+
+
+
+
+
+
