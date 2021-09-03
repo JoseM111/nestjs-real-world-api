@@ -1,0 +1,12 @@
+### GET users url
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "user": {
+    "username": "foogazy",
+    "email": "foogazy@gmail.com",
+    "password": "3210"
+  }
+}
+

@@ -1,0 +1,2 @@
+### GET tag url
+GET http://localhost:3000/tags
