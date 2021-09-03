@@ -1,5 +1,7 @@
 /** user.controller.ts */
 import { CreateUserDTO } from "@/user/dtos/create-user.dto"
+import { UserEntity } from "@/user/entities/user.entity"
+import { UserResponseType } from "@/user/types/user.response.type"
 import { UserService } from "@/user/user.service"
 import { Body, Controller, Post } from '@nestjs/common'
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
@@ -14,10 +16,11 @@ export class UserController {
 	/// ======== <> member-request-methods <> ========
 	@Post('/users')
 	async createUser(
-	@Body('user') createUserDTO: CreateUserDTO): Promise<CreateUserDTO> {
+	@Body('user') createUserDTO: CreateUserDTO): Promise<UserResponseType> {
 		//..........
 		// console.log('createUser:', createUserDTO)
-		return this.userService.serviceCreateUser(createUserDTO)
+		const user = await this.userService.serviceCreateUser(createUserDTO)
+		return this.userService.serviceBuildUserResponse(user)
 	}
 }
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
