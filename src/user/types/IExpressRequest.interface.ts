@@ -1,19 +1,9 @@
-/** user.module.ts */
+/** IExpressRequest.interface.ts */
 import { UserEntity } from "@/user/entities/user.entity"
-import { Module } from '@nestjs/common'
-import { TypeOrmModule } from "@nestjs/typeorm"
-import { UserController } from './user.controller'
-import { UserService } from './user.service'
+import { Request } from 'express'
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 
-@Module({
-	imports: [
-		TypeOrmModule.forFeature([ UserEntity ]),
-	],
-	providers: [ UserService ],
-	controllers: [ UserController ],
-	exports: [ UserService ]
-})
-export class UserModule {}
+export interface IExpressRequestInterface extends Request  {
+	user?: UserEntity
+}
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
-

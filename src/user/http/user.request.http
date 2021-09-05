@@ -23,4 +23,21 @@ Content-Type: application/json
 }
 ############################################################
 
+### GET REQUEST get the current user by web token
+GET http://localhost:3000/user
+Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJUYXRhLUxhLUxpY2lvdXMiLCJpYXQiOjE2MzA4MDYyNTR9.wGakx44Zx5FisWl6fyn4JBmzLd9yYW2Ay1pAyQv1zKw
+############################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
 

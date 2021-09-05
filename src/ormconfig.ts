@@ -8,7 +8,7 @@ const ORM_CONFIG: ConnectionOptions = {
 	port: 5432,
 	username: 'alias111',
 	password: 'alias111',
-	database: 'mediumclone_nestjs',
+	database: 'mediumclone',
 	entities: [
 		__dirname + "/**/*.entity{.ts,.js}"
 	],

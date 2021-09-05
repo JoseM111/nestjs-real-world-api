@@ -108,6 +108,14 @@ export class UserService {
 		return userToLogin
 	}
 	
+	async findByID(id: number): Promise<UserEntity> {
+		//..........
+		return await this.userRepo.findOne(id)
+	}
+	
+	
+	
+	/// ======== <> helper-methods <> ========
 	serviceBuildUserResponse(user: UserEntity): UserResponseType {
 		//..........
 		return {
@@ -118,7 +126,6 @@ export class UserService {
 		}
 	}
 	
-	/// ======== <> helper-methods <> ========
 	/** @json-web-tokens:
 	 * are managed on the client while a session with
 	 * cookies is managed on the server. a hacker in a
