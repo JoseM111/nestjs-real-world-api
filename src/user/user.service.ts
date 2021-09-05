@@ -17,8 +17,7 @@ export class UserService {
 	constructor(
 	@InjectRepository(UserEntity)
 	private readonly userRepo: Repository<UserEntity>
-	) {
-	}
+	) {}
 	
 	/// ======== <> member-service-methods <> ========
 	async serviceCreateUser(createUserDTO: CreateUserDTO): Promise<UserEntity> {
@@ -65,14 +64,14 @@ export class UserService {
 	
 	async serviceLogin(loginUserDTO: LoginUserDTO): Promise<UserEntity> {
 		//..........
-		const userToLogin = await this.userRepo
-		.findOne(
+		const selectOptions: (keyof UserEntity)[] = [
+			'id', 'username', 'bio',
+			'image', 'password'
+		]
+		
+		const userToLogin = await this.userRepo.findOne(
 		{ email: loginUserDTO.email },
-		{
-			select: [
-				'id', 'username', 'bio',
-				'image', 'password'
-			]}
+		{ select: selectOptions }
 		)
 		
 		// 1. First we are checking if the user exist. If the user
@@ -114,14 +113,13 @@ export class UserService {
 	}
 	
 	
-	
 	/// ======== <> helper-methods <> ========
 	serviceBuildUserResponse(user: UserEntity): UserResponseType {
 		//..........
 		return {
 			user: {
 				...user,
-				token: this.generateJwt(user)
+				token: this.generateJWT(user)
 			}
 		}
 	}
@@ -132,13 +130,13 @@ export class UserService {
 	 * session managed on a server can attack the client
 	 * by providing a redirect & having the client input
 	 * i.e for example there email, password..etc */
-	generateJwt(user: UserEntity): string {
+	generateJWT(user: UserEntity): string {
 		//..........
 		return sign({
 			id: user.id,
 			username: user.username,
 			email: user.email,
-		}, JWT_SECRET_KEY,)
+		}, JWT_SECRET_KEY)
 	}
 }
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
