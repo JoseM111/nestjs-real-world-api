@@ -1,10 +1,9 @@
 /** app.module.ts */
-import { AppController } from "@/app/app.controller"
-import { AppService } from "@/app/app.service"
 import * as ORM_CONFIG from "@/ormconfig"
 import { TagModule } from "@/tag/tag.module"
+import { AuthMiddleware } from "@/user/middlewares/auth.middleware"
 import { UserModule } from "@/user/user.module"
-import { Module } from "@nestjs/common"
+import { MiddlewareConsumer, Module, RequestMethod } from "@nestjs/common"
 import { TypeOrmModule } from "@nestjs/typeorm"
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 
@@ -14,9 +13,35 @@ import { TypeOrmModule } from "@nestjs/typeorm"
 		UserModule,
 		TypeOrmModule.forRoot(ORM_CONFIG),
 	],
-	controllers: [ AppController ],
-	providers: [ AppService ],
+	controllers: [  ],
+	providers: [  ],
 })
+// ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+
 export class AppModule {
+	/// ======== <> member-methods <> ========
+	configure(consumer: MiddlewareConsumer) {
+		//..........
+		consumer.apply(AuthMiddleware)
+		.forRoutes({
+			path: '*',
+			method: RequestMethod.ALL
+		})
+	}
 }
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
