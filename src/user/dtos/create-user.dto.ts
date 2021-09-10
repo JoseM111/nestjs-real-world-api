@@ -1,5 +1,5 @@
 /** create-user.dto.ts */
-import { IsEmail, IsNotEmpty, IsString, Matches, MaxLength, MinLength } from "class-validator"
+import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator"
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 
 // class MatchPwd {

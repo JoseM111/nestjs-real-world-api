@@ -1,6 +1,6 @@
 /** auth.middleware.ts */
 import { JWT_SECRET_KEY } from "@/config"
-import { IExpressRequestInterface } from "@/user/types/IExpressRequest.interface"
+import { IExpressRequest } from "@/user/types/IExpressRequest"
 import { UserService } from "@/user/user.service"
 import { Injectable, NestMiddleware } from "@nestjs/common"
 import { NextFunction, Response } from "express"
@@ -13,7 +13,7 @@ export class AuthMiddleware implements NestMiddleware {
 	constructor(private readonly userService: UserService) {}
 	
 	/// ======== <> member-method to-implement <> ========
-	async use(req: IExpressRequestInterface, _: Response, next: NextFunction) {
+	async use(req: IExpressRequest, _: Response, next: NextFunction) {
 		//..........
 		// console.log('authMiddleware use():', req.headers)
 		

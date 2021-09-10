@@ -2,6 +2,7 @@
 import { JWT_SECRET_KEY } from "@/config"
 import { CreateUserDTO } from "@/user/dtos/create-user.dto"
 import { LoginUserDTO } from "@/user/dtos/login-user.dto"
+import { UpdateUserDTO } from "@/user/dtos/update-user.dto"
 import { UserEntity } from "@/user/entities/user.entity"
 import { UserResponseType } from "@/user/types/user.response.type"
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
@@ -112,6 +113,20 @@ export class UserService {
 		return await this.userRepo.findOne(id)
 	}
 	
+	async serviceUpdateUser(userID: number, updateUserDTO: UpdateUserDTO): Promise<UserEntity> {
+		//..........
+		const user = await this.findByID(userID)
+		Object.assign(user, updateUserDTO)
+		
+		const updatedUser = await this.userRepo.save(user)
+		.then((user: UserEntity) => {
+			//..........
+			console.log('User updated:', user)
+			return user
+		})
+		
+		return updatedUser
+	}
 	
 	/// ======== <> helper-methods <> ========
 	serviceBuildUserResponse(user: UserEntity): UserResponseType {

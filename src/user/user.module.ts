@@ -1,5 +1,6 @@
 /** user.module.ts */
 import { UserEntity } from "@/user/entities/user.entity"
+import { UserAuthGuard } from "@/user/guards/user.guard"
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { UserController } from './user.controller'
@@ -10,7 +11,7 @@ import { UserService } from './user.service'
 	imports: [
 		TypeOrmModule.forFeature([ UserEntity ]),
 	],
-	providers: [ UserService ],
+	providers: [ UserService, UserAuthGuard ],
 	controllers: [ UserController ],
 	exports: [ UserService ]
 })
