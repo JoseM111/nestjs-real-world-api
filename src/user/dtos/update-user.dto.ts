@@ -1,9 +1,10 @@
-/** IExpressRequest.interface.ts */
-import { UserEntity } from "@/user/entities/user.entity"
-import { Request } from 'express'
+/** update-user.dto.ts */
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 
-export interface IExpressRequestInterface extends Request  {
-	user?: UserEntity
+export class UpdateUserDTO {
+	// @IsNotEmpty()//<--validation-pipes not needed
+	readonly username: string
+	readonly email: string
+	readonly bio: string
 }
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰

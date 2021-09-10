@@ -1,11 +1,13 @@
 /** user.controller.ts */
+import { UserDecorator } from "@/user/decorators/user.decorator"
 import { CreateUserDTO } from "@/user/dtos/create-user.dto"
 import { LoginUserDTO } from "@/user/dtos/login-user.dto"
+import { UpdateUserDTO } from "@/user/dtos/update-user.dto"
 import { UserEntity } from "@/user/entities/user.entity"
-import { IExpressRequestInterface } from "@/user/types/IExpressRequest.interface"
+import { UserAuthGuard } from "@/user/guards/user.guard"
 import { UserResponseType } from "@/user/types/user.response.type"
 import { UserService } from "@/user/user.service"
-import { Body, Controller, Get, Post, Req, UsePipes, ValidationPipe } from '@nestjs/common'
+import { Body, Controller, Get, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common'
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 
 @Controller()
@@ -47,12 +49,28 @@ export class UserController {
 	}
 	
 	@Get('/user')
-	async currentUser(@Req() request: IExpressRequestInterface): Promise<UserResponseType> {
+	@UseGuards(UserAuthGuard)
+	async currentUser(@UserDecorator() user: UserEntity): Promise<UserResponseType> {
 		//..........
-		console.log(`\n[ GET REQUEST ] CURRENT USER: ( ${ request.user.username } )`,)
-		return this.userService.serviceBuildUserResponse(request.user)
+		console.log('UserDecorator:', user)
+		console.log(`\n[ GET REQUEST ] CURRENT USER: ( ${ user.username } )`,)
+		return this.userService.serviceBuildUserResponse(user)
 	}
 	
+	@Put('/user')
+	@UseGuards(UserAuthGuard)
+	async updateCurrentUser(
+	@UserDecorator('id') currentUserID: number,
+	@Body('user') updateUserDTO: UpdateUserDTO
+	): Promise<UserResponseType> {
+		//..........
+		const userToUpdate = await this.userService
+		.serviceUpdateUser(
+		currentUserID,
+		updateUserDTO
+		)
+		return this.userService.serviceBuildUserResponse(userToUpdate)
+	}
 	
 }
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰

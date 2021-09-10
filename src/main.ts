@@ -23,7 +23,7 @@ bootstrap()
 	const bootstrapStr = `
 	☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 	 --[ NESTJS ]--project booted up correctly--( WELCOME )--
-	 \t${portStr.trim()}
+	 \t${ portStr.trim() }
 	☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 	`
 	console.log(bootstrapStr)
