@@ -1,4 +1,5 @@
 /** app.module.ts */
+import { ArticleModule } from "@/article/article.module"
 import * as ORM_CONFIG from "@/ormconfig"
 import { TagModule } from "@/tag/tag.module"
 import { AuthMiddleware } from "@/user/middlewares/auth.middleware"
@@ -11,10 +12,11 @@ import { TypeOrmModule } from "@nestjs/typeorm"
 	imports: [
 		TagModule,
 		UserModule,
+		ArticleModule,
 		TypeOrmModule.forRoot(ORM_CONFIG),
 	],
-	controllers: [  ],
-	providers: [  ],
+	controllers: [],
+	providers: [],
 })
 // ⚫️⚫️☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰☰
 

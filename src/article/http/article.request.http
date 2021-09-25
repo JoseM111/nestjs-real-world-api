@@ -1,0 +1,13 @@
+### [POST REQUEST] create article
+POST http://localhost:3000/articles
+Content-Type: application/json
+Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJUYXRhLUxhLUxpY2lvdXMiLCJpYXQiOjE2MzA4MDYyNTR9.wGakx44Zx5FisWl6fyn4JBmzLd9yYW2Ay1pAyQv1zKw
+
+{
+  "article": {
+    "title": "Art Of The Shaolin",
+    "description": "Wu-tang..WU-TANG?",
+    "body": "Sharpen Your Sword!",
+    "tagList": ["gza", "rza", "old dirty bastard"]
+  }
+}
